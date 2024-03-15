@@ -72,13 +72,13 @@ fun ResetPasswordScreen(navController: NavController) {
         }
     ){
         Column(
-            verticalArrangement = Arrangement.Top,
+            verticalArrangement = Arrangement.SpaceAround,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.padding(24.dp)
         ){
             Box(modifier = Modifier.height(24.dp))
             Image(
-                painter = painterResource(id = R.drawable.ill_reset_password),
+                painter = painterResource(id = R.drawable.ill_reset_password_amico),
                 contentDescription = "Reset Password Illumination",
                 modifier = Modifier
                     .weight(4.5f)
@@ -88,7 +88,7 @@ fun ResetPasswordScreen(navController: NavController) {
                 contentScale = ContentScale.Fit
             )
             Column(
-                verticalArrangement = Arrangement.Top,
+                verticalArrangement = Arrangement.SpaceAround,
                 horizontalAlignment = Alignment.Start,
                 modifier = Modifier.weight(5.5f)
             ) {
@@ -97,63 +97,72 @@ fun ResetPasswordScreen(navController: NavController) {
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold)
                 )
                 Box(modifier = Modifier.height(16.dp))
-                AppTextField(
-                    value = password,
-                    onValueChange = {
-                        password = it
-                    },
-                    hint = "New Password",
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Outlined.Lock,
-                            contentDescription = "New Password Field",
-                        )
-                    },
-                    trailingIcon = {
-                        Icon(
-                            painter = if (passwordObscure) painterResource(id = R.drawable.ic_outline_visibility) else painterResource(
-                                id = R.drawable.ic_outline_visibility_off
-                            ), contentDescription = "Show New password",
-                            modifier = Modifier.clickable {
-                                passwordObscure = !passwordObscure
-                            }
-                        )
-                    },
-                    obscure = passwordObscure,
-                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-                    keyboardActions = KeyboardActions(onNext = { focusManager.moveFocus(
-                        FocusDirection.Next) }
-                    ),
-                )
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                ) {
+                    AppTextField(
+                        value = password,
+                        onValueChange = {
+                            password = it
+                        },
+                        hint = "New Password",
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Outlined.Lock,
+                                contentDescription = "New Password Field",
+                            )
+                        },
+                        trailingIcon = {
+                            Icon(
+                                painter = if (passwordObscure) painterResource(id = R.drawable.ic_outline_visibility) else painterResource(
+                                    id = R.drawable.ic_outline_visibility_off
+                                ), contentDescription = "Show New password",
+                                modifier = Modifier.clickable {
+                                    passwordObscure = !passwordObscure
+                                }
+                            )
+                        },
+                        obscure = passwordObscure,
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                        keyboardActions = KeyboardActions(onNext = {
+                            focusManager.moveFocus(
+                                FocusDirection.Next
+                            )
+                        }
+                        ),
+                    )
+                    AppTextField(
+                        value = passwordConfirm,
+                        onValueChange = {
+                            passwordConfirm = it
+                        },
+                        hint = "Re-enter New Password",
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Outlined.Lock,
+                                contentDescription = "Re-enter New Password Field",
+                            )
+                        },
+                        trailingIcon = {
+                            Icon(
+                                painter = if (passwordConfirmObscure) painterResource(id = R.drawable.ic_outline_visibility) else painterResource(
+                                    id = R.drawable.ic_outline_visibility_off
+                                ), contentDescription = "Show Re-entered New password",
+                                modifier = Modifier.clickable {
+                                    passwordConfirmObscure = !passwordConfirmObscure
+                                }
+                            )
+                        },
+                        obscure = passwordConfirmObscure,
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                        keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }
+                        ),
+                    )
+                }
                 Box(modifier = Modifier.height(16.dp))
-                AppTextField(
-                    value = passwordConfirm,
-                    onValueChange = {
-                        passwordConfirm = it
-                    },
-                    hint = "Re-enter New Password",
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Outlined.Lock,
-                            contentDescription = "Re-enter New Password Field",
-                        )
-                    },
-                    trailingIcon = {
-                        Icon(
-                            painter = if (passwordConfirmObscure) painterResource(id = R.drawable.ic_outline_visibility) else painterResource(
-                                id = R.drawable.ic_outline_visibility_off
-                            ), contentDescription = "Show Re-entered New password",
-                            modifier = Modifier.clickable {
-                                passwordConfirmObscure = !passwordConfirmObscure
-                            }
-                        )
-                    },
-                    obscure = passwordConfirmObscure,
-                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-                    keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }
-                    ),
-                )
-                Box(modifier = Modifier.height(24.dp))
+//                Box(modifier = Modifier.height(24.dp))
                 Button(
                     onClick = { },
                     shape = RoundedCornerShape(16.dp),

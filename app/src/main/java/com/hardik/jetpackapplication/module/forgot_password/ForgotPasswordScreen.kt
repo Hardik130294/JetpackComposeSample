@@ -75,7 +75,7 @@ fun ForgotPasswordScreen(navController: NavController) {
         ) {
             Box(modifier = Modifier.height(24.dp))
             Image(
-                painter = painterResource(id = R.drawable.ill_forgot_password),
+                painter = painterResource(id = R.drawable.ill_forgot_password_amico),
                 contentDescription = "Forgot Password Illumination",
                 modifier = Modifier
                     .weight(4.5f)
@@ -112,6 +112,7 @@ fun ForgotPasswordScreen(navController: NavController) {
                     keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
                     keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
                 )
+                Box(modifier = Modifier.height(16.dp))
                 Button(
                     onClick = { navController.navigate(RESET_PASSWORD_ROUTE) },
                     shape = RoundedCornerShape(16.dp),
@@ -123,8 +124,6 @@ fun ForgotPasswordScreen(navController: NavController) {
                 }
                 Box(modifier = Modifier.width(16.dp))
             }
-
         }
     }
-
 }

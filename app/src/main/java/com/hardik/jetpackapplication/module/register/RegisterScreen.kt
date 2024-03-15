@@ -1,12 +1,14 @@
 package com.hardik.jetpackapplication.module.register
 
 import android.annotation.SuppressLint
+import android.widget.RemoteViews.RemoteView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -48,6 +50,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.hardik.jetpackapplication.R
@@ -88,7 +91,7 @@ fun RegisterScreen(navController: NavController) {
         ) {
             Box(modifier = Modifier.height(24.dp))
             Image(
-                painter = painterResource(id = R.drawable.ill_sign_up),
+                painter = painterResource(id = R.drawable.ill_sign_up_amico),
                 contentDescription = "Sing up Illumination",
                 modifier = Modifier
                     .weight(3f)
@@ -104,71 +107,77 @@ fun RegisterScreen(navController: NavController) {
                     text = "Sign Up",
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold)
                 )
-                AppTextField(
-                    value = username,
-                    onValueChange = {
-                        username = it
-                    },
-                    hint = "Username",
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Outlined.Person,
-                            contentDescription = "Username Field",
-                        )
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-                    keyboardActions = KeyboardActions(onNext = {
-                        focusManager.moveFocus(
-                            FocusDirection.Next
-                        )
-                    }),
-                )
-                AppTextField(
-                    value = email,
-                    onValueChange = {
-                        email = it
-                    },
-                    hint = "Email Address",
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Outlined.Email,
-                            contentDescription = "Email Field",
-                        )
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-                    keyboardActions = KeyboardActions(onNext = {
-                        focusManager.moveFocus(
-                            FocusDirection.Next
-                        )
-                    }),
-                )
-                AppTextField(
-                    value = password,
-                    onValueChange = {
-                        password = it
-                    },
-                    hint = "Password",
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Outlined.Lock,
-                            contentDescription = "Password Field",
-                        )
-                    },
-                    trailingIcon = {
-                        Icon(
-                            painter = if (passwordObscure) painterResource(id = R.drawable.ic_outline_visibility) else painterResource(
-                                id = R.drawable.ic_outline_visibility_off
-                            ), contentDescription = "Show password",
-                            modifier = Modifier.clickable {
-                                passwordObscure = !passwordObscure
-                            }
-                        )
-                    },
-                    obscure = passwordObscure,
-                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-                    keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }
-                    ),
-                )
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                ) {
+                    AppTextField(
+                        value = username,
+                        onValueChange = {
+                            username = it
+                        },
+                        hint = "Username",
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Outlined.Person,
+                                contentDescription = "Username Field",
+                            )
+                        },
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                        keyboardActions = KeyboardActions(onNext = {
+                            focusManager.moveFocus(
+                                FocusDirection.Next
+                            )
+                        }),
+                    )
+                    AppTextField(
+                        value = email,
+                        onValueChange = {
+                            email = it
+                        },
+                        hint = "Email Address",
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Outlined.Email,
+                                contentDescription = "Email Field",
+                            )
+                        },
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                        keyboardActions = KeyboardActions(onNext = {
+                            focusManager.moveFocus(
+                                FocusDirection.Next
+                            )
+                        }),
+                    )
+                    AppTextField(
+                        value = password,
+                        onValueChange = {
+                            password = it
+                        },
+                        hint = "Password",
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Outlined.Lock,
+                                contentDescription = "Password Field",
+                            )
+                        },
+                        trailingIcon = {
+                            Icon(
+                                painter = if (passwordObscure) painterResource(id = R.drawable.ic_outline_visibility) else painterResource(
+                                    id = R.drawable.ic_outline_visibility_off
+                                ), contentDescription = "Show password",
+                                modifier = Modifier.clickable {
+                                    passwordObscure = !passwordObscure
+                                }
+                            )
+                        },
+                        obscure = passwordObscure,
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                        keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }
+                        ),
+                    )
+                }
                 Text(
                     text = buildAnnotatedString {
                         append("By Signing up, you're agree to our")
@@ -208,6 +217,7 @@ fun RegisterScreen(navController: NavController) {
                         style = MaterialTheme.typography.bodyMedium.copy(color = Blue)
                     )
                 }
+                Box(modifier = Modifier.height(16.dp))
             }
         }
     }

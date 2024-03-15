@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -41,6 +42,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.hardik.jetpackapplication.FORGOT_PASSWORD_ROUTE
@@ -86,48 +88,58 @@ fun LoginScreen(navController: NavController) {
                     text = "Login",
                     style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.Bold)
                 )
-                AppTextField(
-                    value = email,
-                    onValueChange = {
-                        email = it
-                    },
-                    hint = "Email Address",
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Outlined.Email,
-                            contentDescription = "Email Field",
-                        )
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-                    keyboardActions = KeyboardActions(onNext = { focusManager.moveFocus(FocusDirection.Next) }),
-                )
-                AppTextField(
-                    value = password,
-                    onValueChange = {
-                        password = it
-                    },
-                    hint = "Password",
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Outlined.Lock,
-                            contentDescription = "Password Field",
-                        )
-                    },
-                    trailingIcon = {
-                        Icon(
-                            painter = if (passwordObscure) painterResource(id = R.drawable.ic_outline_visibility) else painterResource(
-                                id = R.drawable.ic_outline_visibility_off
-                            ), contentDescription = "Show password",
-                            modifier = Modifier.clickable {
-                                passwordObscure = !passwordObscure
-                            }
-                        )
-                    },
-                    obscure = passwordObscure,
-                    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
-                    keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }
-                    ),
-                )
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                ) {
+                    AppTextField(
+                        value = email,
+                        onValueChange = {
+                            email = it
+                        },
+                        hint = "Email Address",
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Outlined.Email,
+                                contentDescription = "Email Field",
+                            )
+                        },
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+                        keyboardActions = KeyboardActions(onNext = {
+                            focusManager.moveFocus(
+                                FocusDirection.Next
+                            )
+                        }),
+                    )
+                    AppTextField(
+                        value = password,
+                        onValueChange = {
+                            password = it
+                        },
+                        hint = "Password",
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Outlined.Lock,
+                                contentDescription = "Password Field",
+                            )
+                        },
+                        trailingIcon = {
+                            Icon(
+                                painter = if (passwordObscure) painterResource(id = R.drawable.ic_outline_visibility) else painterResource(
+                                    id = R.drawable.ic_outline_visibility_off
+                                ), contentDescription = "Show password",
+                                modifier = Modifier.clickable {
+                                    passwordObscure = !passwordObscure
+                                }
+                            )
+                        },
+                        obscure = passwordObscure,
+                        keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                        keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }
+                        ),
+                    )
+                }
                 TextButton(
                     onClick = {
                         navController.navigate(FORGOT_PASSWORD_ROUTE)
@@ -136,43 +148,55 @@ fun LoginScreen(navController: NavController) {
                 ) {
                     Text(text = "Forgot Password ?")
                 }
-                Button(
-                    onClick = { }, shape = RoundedCornerShape(16.dp), modifier = Modifier
-                        .height(48.dp)
-                        .fillMaxWidth()
-                ) {
-                    Text(text = "Login", style = MaterialTheme.typography.bodyMedium)
-                }
-                Row(
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight(), verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Divider(modifier = Modifier.weight(1f))
-                    Text(
-                        text = "OR",
-                        modifier = Modifier.padding(horizontal = 16.dp),
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    Divider(modifier = Modifier.weight(1f))
-                }
-                OutlinedButton(
-                    onClick = { },
-                    shape = RoundedCornerShape(16.dp),
-                    modifier = Modifier
-                        .height(48.dp)
-                        .fillMaxWidth()
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_google),
-                        contentDescription = "",
-                        modifier = Modifier.padding(vertical = 8.dp)
-                    )
-                    Box(modifier = Modifier.width(32.dp))
-                    Text(
-                        text = "Login with Google",
-                        style = MaterialTheme.typography.bodyMedium.copy(color = Color.Black)
-                    )
+                    Button(
+                        onClick = { }, shape = RoundedCornerShape(16.dp), modifier = Modifier
+                            .height(48.dp)
+                            .fillMaxWidth()
+                    ) {
+                        Text(text = "Login", style = MaterialTheme.typography.bodyMedium)
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight(), verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Divider(modifier = Modifier.weight(1f))
+                        Text(
+                            text = "OR",
+                            modifier = Modifier.padding(horizontal = 16.dp),
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                        Divider(modifier = Modifier.weight(1f))
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    OutlinedButton(
+                        onClick = { },
+                        shape = RoundedCornerShape(16.dp),
+                        modifier = Modifier
+                            .height(48.dp)
+                            .fillMaxWidth()
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_google),
+                            contentDescription = "",
+                            modifier = Modifier.padding(vertical = 8.dp)
+                        )
+                        Box(modifier = Modifier.width(32.dp))
+                        Text(
+                            text = "Login with Google",
+                            style = MaterialTheme.typography.bodyMedium.copy(color = Color.Black)
+                        )
+                    }
                 }
                 Row(
                     modifier = Modifier
@@ -181,13 +205,19 @@ fun LoginScreen(navController: NavController) {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Text(text = "Don't have an account", style = MaterialTheme.typography.bodyMedium)
-                    Box(modifier = Modifier.width(8.dp))                        
-                    Text(text = "Register Here !", style = MaterialTheme.typography.bodyMedium.copy(color = Blue), modifier = Modifier.clickable {
-                        navController.navigate(REGISTER_ROUTE)
-                    })
-
+                    Text(
+                        text = "Don't have an account",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                    Box(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "Register Here !",
+                        style = MaterialTheme.typography.bodyMedium.copy(color = Blue),
+                        modifier = Modifier.clickable {
+                            navController.navigate(REGISTER_ROUTE)
+                        })
                 }
+                Box(modifier = Modifier.height(16.dp))
             }
         }
     }
