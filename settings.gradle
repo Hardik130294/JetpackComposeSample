@@ -3,6 +3,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven{ url "https://oss.sonatype.org/content/repositories/snapshots/v5.2.1-SNAPSHOT"}
     }
 }
 dependencyResolutionManagement {
